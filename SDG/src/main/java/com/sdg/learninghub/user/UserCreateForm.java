@@ -1,0 +1,34 @@
+package com.sdg.learninghub.user;
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class UserCreateForm {
+	@Size(min = 2, max = 45)
+	@NotEmpty(message = "Enter first name.")
+	private String firstName;
+	
+	@Size(min = 2, max = 45)
+	@NotEmpty(message = "Enter last name.")
+	private String lastName;
+	
+	@Size(min = 6, max = 45)
+	private String username;
+	
+	@Size(min = 2, max = 50)
+	@NotEmpty(message = "Enter an email address.")
+	@Email
+	private String email;
+	
+	@Size(max = 40)
+	@NotEmpty(message = "Enter a password.")
+	private String password1;
+	
+	@NotEmpty(message = "Confirm your password")
+	private String password2;
+}
