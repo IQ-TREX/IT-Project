@@ -1,4 +1,4 @@
-package com.sdg.learninghub.user;
+package com.sdg.learninghub.member;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;

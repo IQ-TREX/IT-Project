@@ -1,19 +1,25 @@
-package com.sdg.learninghub.user;
+package com.sdg.learninghub.member;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.Getter;
 import lombok.Setter;
+import jakarta.persistence.Table;
 
 @Getter
 @Setter
 @Entity
-public class SiteUser {
+@Table(name = "users")
+public class Member {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="user_id")
 	private Long id;
 	
 	@Column(unique = true, length = 45)
@@ -31,4 +37,12 @@ public class SiteUser {
 	@Column(nullable = false, length = 45)
 	private String lastName;
 	
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
+	private MemberRole role;
+	
+	@Enumerated(EnumType.STRING)
+	private Provider provider;
+	
+	private String providerId;
 }

@@ -9,6 +9,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
@@ -17,8 +18,12 @@ public class SecurityConfig {
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http
 			.authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
-					.requestMatchers(new AntPathRequestMatcher("/**")).permitAll())
-			;
+					.requestMatchers(new AntPathRequestMatcher("/**")).permitAll());
+		http
+			.formLogin((auth) -> auth
+					.loginPage("/user/login")
+					.defaultSuccessUrl("/"));
+			
 		return http.build();
 	} 
 	

@@ -1,4 +1,4 @@
-package com.sdg.learninghub.user;
+package com.sdg.learninghub.member;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -13,9 +13,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/user")
-public class UserController {
+public class MemberController {
 	
-	private final UserService userService;
+	private final MemberService memberService;
 
 	@GetMapping("/signup")
 	public String signup(UserCreateForm userCreateForm) {
@@ -34,7 +34,7 @@ public class UserController {
 		}
 		
 		try {
-			userService.create(userCreateForm.getUsername(), userCreateForm.getEmail(), 
+			memberService.create(userCreateForm.getUsername(), userCreateForm.getEmail(), 
 					userCreateForm.getPassword1(), userCreateForm.getFirstName(), userCreateForm.getLastName());
 		}catch(DataIntegrityViolationException e) {
 			e.printStackTrace();
@@ -47,6 +47,11 @@ public class UserController {
 		
 		//terms.accept
 		return "redirect:/";
+	}
+	
+	@GetMapping("/login")
+	public String login() {
+		return "login_form";
 	}
 }
 
