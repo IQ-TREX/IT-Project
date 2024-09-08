@@ -1,14 +1,16 @@
-/**package com.sdg.learninghub.user;
+package com.sdg.learninghub.member;
 
-import java.util.List;
+import java.util.Collections;
 import java.util.Optional;
+import java.util.List;
+import java.util.ArrayList;
 
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -22,13 +24,22 @@ public class MemberSecurityService implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String email) throws
 UsernameNotFoundException {
-		Optional<Member> user = this.memberRepository.findByEmail(email);
+		Optional<MemberEntity> user = this.memberRepository.findByEmail(email);
 		if(user.isEmpty()) {
-			throw new UsernameNotFoundException("User does not exist.");
+			new UsernameNotFoundException("USER_NOT_FOUND");
+			System.out.println("USER_NOT_FOUND");
 		}
-		Member member = user.get();
-		List<GrantedAuthority> authorities = new ArrayList<>();
+		MemberEntity memberEntity = user.get();
+		System.out.println(memberEntity.getPassword());
+
+		List<GrantedAuthority>	authorities = new ArrayList<>();
+		if("admin".equals(email)) {
+			authorities.add(new SimpleGrantedAuthority(MemberRole.ADMIN.getValue()));
+		} else {
+			authorities.add(new SimpleGrantedAuthority(MemberRole.USER.getValue()));
+		}
+		return new User(memberEntity.getUsername(), memberEntity.getPassword(), authorities);
 	}
-}*/
+}
 
 

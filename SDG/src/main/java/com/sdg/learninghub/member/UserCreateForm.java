@@ -17,10 +17,10 @@ public class UserCreateForm {
 	@NotEmpty(message = "Enter last name.")
 	private String lastName;
 	
-	@Size(min = 6, max = 45)
+	@Size(min = 2, max = 45)
 	private String username;
 	
-	@Size(min = 2, max = 50)
+	@Size(min = 2, max = 100)
 	@NotEmpty(message = "Enter an email address.")
 	@Email
 	private String email;

@@ -12,7 +12,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.annotation.Rollback;
 
-import com.sdg.learninghub.member.Member;
+import com.sdg.learninghub.member.MemberEntity;
 import com.sdg.learninghub.member.MemberRepository;
 import com.sdg.learninghub.member.MemberRole;
  
@@ -30,17 +30,17 @@ public class MemberRepositoryTests {
 	@Test
 	@DisplayName("Test 1: Store member data in repository.")
 	public void testCreateMember() {
-		Member member = new Member();
-		member.setEmail("test@gmail.com");
-		member.setPassword("1234");
-		member.setFirstName("test");
-		member.setLastName("test");
-		member.setUsername("test");
-		member.setRole(MemberRole.USER);
+		MemberEntity memberEntity = new MemberEntity();
+		memberEntity.setEmail("test@gmail.com");
+		memberEntity.setPassword("1234");
+		memberEntity.setFirstName("test");
+		memberEntity.setLastName("test");
+		memberEntity.setUsername("test2");
+		memberEntity.setRole(MemberRole.USER);
 		
-		Member savedMember = memberRepository.save(member);
-		Member existMember = entityManager.find(Member.class, savedMember.getId());	     
-		assertThat(member.getEmail()).isEqualTo(existMember.getEmail());
-		assertThat(member.getPassword()).isEqualTo(existMember.getPassword());
+		MemberEntity savedMember = memberRepository.save(memberEntity);
+		MemberEntity existMember = entityManager.find(MemberEntity.class, savedMember.getId());	     
+		assertThat(memberEntity.getEmail()).isEqualTo(existMember.getEmail());
+		assertThat(memberEntity.getPassword()).isEqualTo(existMember.getPassword());
 	}
 }

@@ -15,7 +15,7 @@ import jakarta.persistence.Table;
 @Setter
 @Entity
 @Table(name = "users")
-public class Member {
+public class MemberEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +25,7 @@ public class Member {
 	@Column(unique = true, length = 45)
 	private String username;
 	
-	@Column(length = 40)
+	@Column
 	private String password;
 	
 	@Column(unique = true, nullable = false, length = 50)
@@ -38,7 +38,6 @@ public class Member {
 	private String lastName;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(nullable = false)
 	private MemberRole role;
 	
 	@Enumerated(EnumType.STRING)

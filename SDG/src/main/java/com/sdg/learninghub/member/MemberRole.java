@@ -9,7 +9,7 @@ public enum MemberRole {
 	ADMIN("ROLE_ADMIN");
 	
 	MemberRole(String value) {
-		this.value =value;
+		this.value = value;
 	}
 	
 	private String value;
