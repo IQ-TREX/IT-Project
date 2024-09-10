@@ -27,10 +27,8 @@ UsernameNotFoundException {
 		Optional<MemberEntity> user = this.memberRepository.findByEmail(email);
 		if(user.isEmpty()) {
 			new UsernameNotFoundException("USER_NOT_FOUND");
-			System.out.println("USER_NOT_FOUND");
 		}
 		MemberEntity memberEntity = user.get();
-		System.out.println(memberEntity.getPassword());
 
 		List<GrantedAuthority>	authorities = new ArrayList<>();
 		if("admin".equals(email)) {

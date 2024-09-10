@@ -1,5 +1,6 @@
 package com.sdg.learninghub;
 
+import com.sdg.learninghub.member.CustomOAuth2UserService;
 import com.sdg.learninghub.member.MemberRepository;
 
 import org.springframework.context.annotation.Bean;
@@ -18,6 +19,11 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 @EnableWebSecurity
 public class SecurityConfig {
 	//private final MemberSecurityService memberSecurityService;
+	private final CustomOAuth2UserService customOAuth2UserService;
+	
+	public SecurityConfig(CustomOAuth2UserService customOAuth2UserService) {
+		 this.customOAuth2UserService = customOAuth2UserService;
+	}
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http
@@ -33,13 +39,15 @@ public class SecurityConfig {
 					.usernameParameter("email") 
 					.permitAll()
 		);
-		/**http
-			.oauth2Login((login) -> login
-					.defaultSuccessUrl("/user/login-success")
-					.failureUrl("/user/access_denied")
-					.permitAll()
-					//.userService(customOAuth2UserService)
-		);*/
+		http
+	    .oauth2Login(oauth2 -> oauth2
+	        .defaultSuccessUrl("/user/login_success", true)
+	        .failureUrl("/user/access_denied")
+	        .permitAll()
+	        .userInfoEndpoint(userInfo -> userInfo
+	            .userService(customOAuth2UserService)
+	        )
+	    );
 		http
 			.logout((logout) -> logout
 					.logoutSuccessUrl("/home")
