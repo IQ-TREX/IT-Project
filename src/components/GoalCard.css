@@ -1,0 +1,25 @@
+.goal-card {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.goal-icon {
+  font-size: 50px;
+  margin-bottom: 10px;
+}
+
+.play-button {
+  background: black;
+  border: none;
+  color: white;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+}
